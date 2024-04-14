@@ -3,8 +3,8 @@
  *      CSE/ECE 474 introductory C programming assignment  #2
  *      Spring 2023
  *
- *      Student Name:
- *      Student ID:
+ *      Student Name: Michael Ibrahim
+ *      Student ID: 2222291
  *
  *      WRITE YOUR CODE IN THIS FILE
  *
