@@ -58,8 +58,10 @@ Format of assignment:
  */
 
 long mangle(long SID){
-    // YOUR CODE HERE
-    return 0;
+    SID >>= 2;
+    SID &= ~(1 << 6);
+    SID ^= 1 << 3;
+    return SID;
 }
 
 /* Part 1.2  More bit manipulation. The function bit_check(int data, int bits_on,
@@ -97,8 +99,15 @@ long mangle(long SID){
  */
 
 int  bit_check(int data, int bits_on, int bits_off){
-    // YOUR CODE HERE
-    return 0;
+    if(((data | bits_on) == data) && ((data & bits_off) == 0)){
+      return 1;
+    }
+    else if ((bits_on & bits_off) != 0){
+      return -1;
+    }
+    else {
+      return 0;
+    }
 }
 
 /*******************************************************************************
