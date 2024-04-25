@@ -126,8 +126,12 @@ char a_array[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
  */
 
 char* pmatch(char c){
-    // YOUR CODE HERE
-    return 0;
+    if (c < 'A' || c > 'Z') {
+        return NULL;  // Return NULL if it's not a capital letter
+    }
+
+    int index = c - 'A';
+    return &a_array[index];
 }
 
 /* Part 2.2: Write the function char nlet(char* ptr) where ptr is a pointer
@@ -138,8 +142,8 @@ char* pmatch(char c){
  */
 
 char nlet(char *ptr){
-    // YOUR CODE HERE
-    return 0;
+    if (*(ptr) == 'Z' || *ptr == -1) return -1;
+    return *(++ptr);
 }
 
 /* Part 2.3: Write the function int ldif(char c1, char c2) to find the alphabet
@@ -151,8 +155,9 @@ char nlet(char *ptr){
  */
 
 int ldif(char c1, char c2){
-    // YOUR CODE HERE
-    return 0;
+    if(c1 > 'Z' || c2 > 'Z') return -999;
+
+    return c2 - c1;
 }
 
 
@@ -190,7 +195,7 @@ int ldif(char c1, char c2){
  */
 int personSize(Person p){
     // YOUR CODE HERE
-    return 0;
+    return sizeof(p);
 }
 /* Part 3.3: Write a function: per_print(person * p)  which prints out a
  * formatted person. If the person's address is longer than 60 characters,
@@ -221,10 +226,33 @@ int personSize(Person p){
  *  -----------------------
  */
 void float_to_ints(float f, int* output){
-  // YOUR CODE HERE
+  output[0] = (int) f;
+  output[1] = (int)round((f - output[0]) * 100);
 }
 
 char* per_print(Person *p, char* personbuf){
-    // YOUR CODE HERE
+    
+    int height[2];
+    int weight[2];
+
+    float_to_ints(p->Height, height); 
+    float_to_ints(p->Weight, weight);
+
+    char trun_addr[61];
+    strncpy(trun_addr, p->StreetAddr, 60);
+    trun_addr[60] = '\0';
+
+    sprintf(personbuf, "--- person report: ----\n"
+                       "First Name:       %s\n"
+                       "Last Name:        %s\n"
+                       "Address:          %s\n"
+                       "Zip:              %s\n" 
+                       "Height (m):       %d.%d\n"
+                       "Weight (kg):      %d.%d\n"
+                       "DOB 1/1/1900:     %ld\n"
+                       "-----------------------\n",
+            p->FirstName, p->LastName, trun_addr, p->ZipCode,
+            height[0], height[1], weight[0], weight[1], p->DBirth);
+
     return personbuf;
 }
